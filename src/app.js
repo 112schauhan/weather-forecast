@@ -7,6 +7,8 @@ const geocode = require("./utils/geocode");
 
 const app = express();
 
+const port=process.env.PORT || 3000;
+
 //Define paths for express config
 const publicDirectoryPath = path.join(__dirname, "../public");
 const viewPath = path.join(__dirname, "../templates/views");
@@ -22,7 +24,7 @@ app.use(express.static(publicDirectoryPath));
 
 app.get("", (req, res) => {
   res.render("index", {
-    title: "Weather",
+    title: "Weather Forecast",
     name: "Anil Kumar"
   });
 });
@@ -30,7 +32,8 @@ app.get("", (req, res) => {
 app.get("/help", (req, res) => {
   res.render("help", {
     title: "Help Section",
-    body: "7042739391",
+    contact1: "+91 7042739391",
+    contact2:"mourrrya@gmail.com",
     name: "Anil Kumar"
   });
 });
@@ -45,7 +48,7 @@ app.get("/about", (req, res) => {
 app.get("/weather", (req, res) => {
   if (!req.query.address) {
     return res.send({
-      error: "provide the query"
+      error: "Please provide a location first."
     });
   }
   geocode(req.query.address, (error, { latitude, longitude, place }={}) => {
@@ -82,6 +85,6 @@ app.get("*", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("are you console log");
+app.listen(port, () => {
+  console.log("Server is up on port "+port);
 });
