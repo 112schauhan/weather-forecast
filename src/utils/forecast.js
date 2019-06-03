@@ -15,7 +15,7 @@ request({ url: url, json: true }, (error, {body}) => {
         // 		//! and using object destructuring
         callback('check your url',undefined);
     } else {
-        callback(undefined,body.daily.data[0].summary + ' It is currently ' + body.currently.summary+' and '+body.currently.temperature + ' degress out. There is a ' + body.currently.precipProbability + '% chance of rain.')
+        callback(undefined,body.daily.data[0].summary + ' It is currently ' + body.currently.summary+' and '+body.currently.temperature + ' degress out. The high today is '+body.daily.data[0].temperatureHigh +' with a low of '+body.daily.data[0].temperatureLow+'.')
     }
 });
 }
